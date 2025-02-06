@@ -1,0 +1,21 @@
+Assignment 3
+1. To start I looked to identify where a vulnerability might be possible in getscore.heap I saw that there was code being freed. Since we know when it is being freed, the address of the code being freed and where free is then we know there is a vulnerability.
+
+2. To find the addresses I ran the debugger on getscore_heap by doing the command gdb ./getscore_<random> <random numbers> I was able to find the address of matching pattern as 0x08049ec8. This is included in the matching.png
+
+3. I found the buffer for it, being determined by "name" + 17
+
+4. Next for the address of free, I ran the command objdump -R ./getscore_heap. This showed the address of free was at 0x08049d30.
+
+5. Now I need shell code. Using the code given in heap_exploit.c I made the changes necessary to the code in RedHat8. Looking at the code the minimum buffer size is 45, as well as shell code + 20 bytes. After looking over the file and making changes I recompiled the file using gcc -o heap_exploit heap_exploit.c.
+
+6. Then I ran the command to create the $EGG ./heap_exploit 128 0x08049d30 0x8049ec8. The output of this is in the 551Working screenshot.
+
+7. Next creating the SSN variable. The key for this is to fill the rest of matching_pattern with nop sleds, and overwrite the metadata at the top of the chunk with 1's , and change the forward and backward pointer.
+8. So I made a file titled exploit.py (NOW INCLUDED IN ZIP FILE) and using what I knew about the NOP Sled being around 17 characters. Through some trial and error I eventually got it to work with 14 NOPS.
+
+9. To find the forward pointer I used the memory address for free, found in screenshot 2 and subtracted 12 So 0x08049d30 -12 = 0x8049d24, avoiding the metadata words written at the beginning of the chunk of memory holding free.
+
+10 . To find the back pointer I used Egg's address +8  so 0x8049ec8 +8 = 0x08049ed0.
+11. Then to set the value of SSN I did $SSN=./exploit.py . Then lastly I ran the exploit as : ./getscore_heap $EGG $SSN. 
+12. The screenshot of the last step is also under the name of 551Working.

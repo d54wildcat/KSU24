@@ -1,0 +1,66 @@
+# Modernizing K-State's IT Support: A Strategic Investment in Service Excellence
+
+## Opening (30 seconds)
+Good morning, distinguished leaders. Today, I'm presenting a solution that will transform how Kansas State University delivers IT support to our faculty, staff, and students. Our current support system, while functional, is holding us back from delivering the world-class service our institution deserves.
+
+## Current Challenges (1 minute)
+Let me paint a picture that might sound familiar. A professor needs urgent access to research computing resources before a grant deadline. They submit a ticket, but due to our fragmented support system, it gets misrouted twice. Three days later, they're still waiting, putting their grant application at risk.
+
+This isn't an isolated incident. Our current system faces several critical challenges:
+- Long wait times during peak periods, especially term starts
+- Unclear processes for reporting issues
+- Difficult access to specialized resources
+- Inconsistent service delivery across departments
+
+## Proposed Solution (2 minutes)
+We're proposing a comprehensive modernization of our IT support infrastructure using ServiceNow, the industry leader in IT service management. This isn't just another IT system – it's a transformation in how we serve our university community.
+
+Key components of our solution:
+
+1. Unified Service Portal
+- One-stop destination for all IT support needs
+- Clear, intuitive interface for submitting requests
+- Integrated knowledge base for self-service
+
+2. Intelligent Workflow Automation
+- Automatic ticket routing to appropriate teams
+- Real-time tracking and notifications
+- Proactive alert system for potential issues
+EXPAND ON THIS
+3. Tiered Support Model
+- Tier 1: General inquiries and common issues
+- Tier 2: Technical specialists for complex problems
+- Tier 3: Dedicated research computing support 
+
+## Implementation Approach (1.5 minutes)
+We've developed a careful, phased approach to minimize disruption:
+
+Phase 1: Pilot Program
+- Start with 2-3 departments
+- Gather user feedback
+- Refine processes
+
+Phase 2: Scaled Implementation
+- Gradual rollout across colleges
+- Comprehensive staff training
+- Building knowledge base
+
+Phase 3: Full Integration
+- University-wide deployment
+- Advanced features activation
+- Continuous improvement cycle
+
+## Benefits and ROI (1 minute)
+Based on implementations at peer institutions like American University and the University of California system, we project:
+- Substantial reduction in ticket resolution times
+- Improved first-contact resolution rates
+- Better resource utilization through automation
+- Enhanced user satisfaction across all stakeholder groups
+
+## Investment and Timeline (30 seconds)
+The implementation can be completed within 12 months, with initial benefits visible within the first quarter. While there are upfront costs for licensing and training, the efficiencies gained through automation and reduced manual work will drive significant long-term savings.
+
+## Closing (30 seconds)
+By implementing ServiceNow, we're not just upgrading our IT support – we're investing in K-State's future. This solution will enhance our ability to support critical research, improve the student experience, and free up our staff to focus on innovation rather than routine tasks.
+
+The question isn't whether we should modernize our IT support, but rather: can we afford not to? Thank you for your time. I'm happy to take any questions.

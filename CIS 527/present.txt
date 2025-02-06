@@ -1,0 +1,89 @@
+Optimizing K-State's IT Support Infrastructure: Taking ServiceNow to the Next Level
+
+
+Good morning, everyone! So today I'm going how we can Modernize Kansas State's IT Support Infrastructure. to share with you a plan on how to make Kansas State University's ServiceNow setup better. We've done some good stuff with what we have now, but truthfully, we've been just getting started. 
+It only takes a few strategic upgrades and some better integration for us to really transform IT support from just a basic ticket system into a powerful service platform that actually empowers our academic objectives.
+So first a brief overview of the presentation, I will first go over the curent state of IT support here at KSU. I will then go over the Overview of my proposed ServiceNow reimplementation. Then I will go over my proposed targeted upgrades to improve functionality of the current system and to help
+with user experience. Then I will highlight some Enhancements for Better Integration and seamless service delivery, and finally I will highlight the goals of the IT Support Transformation.
+
+So first, While our current ServiceNow implementation has provided a foundation for IT support, there are several critical limitations.
+
+1. System Fragmentation
+- Different departments are using ServiceNow individually.
+• No integrated workflows between departments
+- Inconsistent experiences in service delivery
+
+2. Explore Computing Gaps
+• Limited Support for special-purpose academic software
+- There's no dedicated route for research computing things.
+• Complex requests are usually misrouted or delayed
+
+3. Resource Allocation Problems
+- Peak periods overwhelming support staff
+- Manual ticket assignment causing delays
+- Few Self-service facilities
+
+These limitations are especially apparent during critical times, such as semester starts, when our faculty and students need seamless access to resources.
+So how can we change this? Well th ere are some enhancements we can implement and here are my Proposed Improvements
+We're suggesting some significant overhauling in how we're using ServiceNow in three big areas:
+
+1. Integration and Workflow Enhancement
+- Unify isolated ServiceNow instances
+Implement automatic routing depending on the type of request
+• Facilitate seamless handoffs between support tiers —
+3. Tiered Support Model
+- Tier 1: General inquiries and common issues
+- Tier 2: Technical specialists for complex problems
+- Tier 3: Dedicated research computing support 
+2. Research Computing Support
+• Dedicated research computing support queue
+- A knowledge source of research software.
+• High-performance computing resources integration
+- Priority routing for grant-related requests
+
+3. Service Delivery Optimization
+- Enhanced self-service portal
+- AI-powered knowledge base recommendations
+• Automated escalation paths
+- Real-time SLA tracking and alerts
+
+## Implementation Plan 
+So we have a conservative improvement plan:
+
+Phase 1: Assessment and Planning - 2 months
+- Audit current ServiceNow usage
+- Survey user pain points
+- Map existing workflows
+- Identify integration opportunities
+
+Phase 2: Better Support System (3 months)
+- Implement three-tier support model
+• Train staff in the new processes
+- Develop domain-specific knowledge base
+- Configure automated routing
+
+Phase 3: Mixing in Research Computing (3 months)
+- Deploy a research computing queue
+- Collaborate with school systems
+- Build custom forms and workflows
+- Train research support specialists
+
+## Expected Benefits 
+Based on similar optimizations at other universities, we expect:
+- More efficient use of resources
+- Better Service Consistency
+• More support for the research materials - Decreased resolution times
+
+• Better customer satisfaction
+
+- More proactive issue resolution
+
+## Investment and ROI 
+
+This optimization isn't subject to much additional licensing cost as we already own ServiceNow. 
+The real investment is in: - Staff training - Configuration changes - Integration development - Knowledge base creation You'll receive your return on investment by:
+ - Reduced manual labor - Better resource allocation - Fewer escalations • Greater research support efficiency 
+## Closing 
+ We can take academic excellence and research innovation to the next level if we just tweak our ServiceNow setup. 
+The basics are in place, so now it is just a matter of making it work its magic. ## Chat & Questions (what's left) 
+Sure, I'd be happy to discuss any portion of this optimization plan in greater detail.

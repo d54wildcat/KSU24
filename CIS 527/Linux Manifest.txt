@@ -1,0 +1,150 @@
+# need to install puppet module acl
+#user class
+include stdlib
+
+class users {
+	
+	$admin_password_hash = pw_hash('AdminPassword123', 'SHA-512', 'randomsalt12')
+	$guest_password_hash = pw_hash('GuestPassword123', 'SHA-512', 'randomsalt12')
+	$normal_password_hash = pw_hash('NormalPassword123', 'SHA-512', 'randomsalt12')
+	$evil_password_hash = pw_hash('EvilPassword123', 'SHA-512', 'randomsalt12')
+
+
+	group { 'admingroup':
+		ensure => present,
+	}
+	user { 'cis527' :
+		ensure => present,
+		shell => '/bin/bash',
+		managehome => true,
+		groups => ['admingroup'],
+	}
+#admin account
+	user { 'adminaccount':
+		ensure => present,
+		password => $admin_password_hash,
+		shell => '/bin/bash',
+		managehome => true,
+		groups => ['sudo', 'admingroup']
+	}
+#adding normal users
+	user { 'guestaccount':
+		ensure => present,
+		password => $guest_password_hash,
+		shell => '/bin/bash',
+		managehome => true,
+	} 
+	user { 'evilaccount':
+		ensure => present,
+		password => $evil_password_hash,
+		shell => '/bin/bash',
+		managehome => true,
+	}
+	user { 'normalaccount':
+		ensure => present,
+		password  => $normal_password_hash,
+		shell => '/bin/bash',
+		managehome => true,
+	}
+#creating admin group and adding adminaccount
+
+}
+#creating folder structure for lab 2
+class files {
+	file { '/cis527':
+		ensure => directory,
+		owner => 'root',
+		group => 'root',
+		mode => '0777',
+	}
+#array of users to create directories for
+	file { '/cis527/adminaccount':
+		ensure => directory,
+		owner => 'adminaccount',
+		group => 'admingroup',
+		mode => '0770',
+		require => File['/cis527'],
+	}
+	file { '/cis527/normalaccount':
+		ensure => directory,
+		owner => 'normalaccount',
+		group => 'admingroup',
+		mode => '0770',
+		require => File['/cis527'],
+	}
+	file { '/cis527/guestaccount':
+		ensure => directory,
+		owner => 'guestaccount',
+		group => 'admingroup',
+		mode => '0770',
+		require => File['/cis527'],
+	}
+	file { '/cis527/evilaccount':
+		ensure => directory,
+		owner => 'evilaccount',
+		group => 'admingroup',
+		mode => '0770',
+		require => File['/cis527'],
+	}
+#creating the text file for each folder
+	file { "/cis527/adminaccount/info.txt":
+		ensure => present,
+		content => "This is the folder for adminaccount\n",
+		owner => 'adminaccount',
+		group => 'admingroup',
+		mode => '0770',
+		require => File['/cis527/adminaccount'],
+	}
+	file { "/cis527/normalaccount/info.txt":
+		ensure => present,
+		content => "This is the folder for normalaccount\n",
+		owner => 'normalaccount',
+		group => 'admingroup',
+		mode => '0770',
+		require => File['/cis527/normalaccount'],
+	}
+	file { "/cis527/guestaccount/info.txt":
+		ensure => present,
+		content => "This is the folder for guestaccount\n",
+		owner => 'guestaccount',
+		group => 'admingroup',
+		mode => '0770',
+		require => File['/cis527/guestaccount'],
+	}
+	file { "/cis527/evilaccount/info.txt":
+		ensure => present,
+		content => "This is the folder for evilaccount\n",
+		owner => 'evilaccount',
+		group => 'admingroup',
+		mode => '0770',
+		require => File['/cis527/evilaccount'],
+	}	
+}
+#Software
+class software {
+	package { [
+		'firefox',
+		'thunderbird',
+		'apache2',
+		'synaptic',
+		'gufw',
+		'clamav'
+	]:
+		ensure => installed,
+	}
+	service { 'apache2':
+		ensure => running,
+		enable => true,
+		require => Package['apache2'],
+	}
+	#service { 'gufw':
+	#	ensure => running,
+	#	enable => true,
+	#	require => Package['gufw'],
+	#}
+}
+
+#Apply classes
+include users
+include files
+include software

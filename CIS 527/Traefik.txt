@@ -1,0 +1,33 @@
+services:
+  proxy:
+    image: traefik:v2.7
+    container_name: proxy
+    command: --api.insecure=true --providers.docker
+    ports:
+      - "80:80"     #proxy
+      - "8081:8080"   #web dashboard
+    volumes:
+      #Security Concern!
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - default
+      - internal
+  whoami1:
+    image: jwilder/whoami
+    container_name: whoami1
+    networks:
+      - internal
+    labels:
+      - "traefik.http.routers.whoami1.rule=Host(`cis527alpha.dwielancis527.me`)"
+      - "traefik.http.services.whoami1.loadbalancer.server.port=8080"
+  whoami2:
+    image: jwilder/whoami
+    container_name: whoami2
+    networks:
+      - internal
+    labels:
+      - "traefik.http.routers.whoami2.rule=Host(`cis527bravo.dwielancis527.me`)"
+      - "traefik.http.services.whoami2.loadbalancer.server.port=8080"
+networks:
+    internal:
+      internal: true
